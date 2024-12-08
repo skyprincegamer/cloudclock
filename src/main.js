@@ -1,18 +1,26 @@
 const { invoke } = window.__TAURI__.core;
 
-let greetInputEl;
-let greetMsgEl;
+let timeMsgBox;
 
-async function greet() {
+
+async function showTime() {
   // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-  greetMsgEl.textContent = await invoke("greet", { name: greetInputEl.value });
+
+
+  function updateClock ( clock ) {
+    clock.innerHTML = new Date().toLocaleTimeString();
+  }
+
+  setInterval(function () {
+      updateClock( timeMsgBox);
+  }, 1000);
+
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  greetInputEl = document.querySelector("#greet-input");
-  greetMsgEl = document.querySelector("#greet-msg");
-  document.querySelector("#greet-form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    greet();
+  timeMsgBox= document.querySelector("#time-msg");
+  document.querySelector("#time-button").addEventListener("click", (e) => {
+    showTime();
+    document.querySelector("#time-button").removeEventListener("show-time");
   });
 });
