@@ -11,6 +11,7 @@ function updateClock(clock) {
 }
 
 function showTime() {
+   var timeMsgBox = document.querySelector("#time-msg");
    setInterval(function() {
       updateClock(timeMsgBox);
    }, 1000);
