@@ -24,7 +24,7 @@ window.addEventListener("DOMContentLoaded", () => {
     document.querySelector("#time-button").removeEventListener("show-time");
   });
 });
-document.querySelector("#set-timer").addEventListener("click" , (e) => 
+document.querySelector("#set-timer").addEventListener("click" , (e) =>
 {
   setTimer();
 
