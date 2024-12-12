@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "clockclock-new",
+  "productName": "CloudClock",
   "version": "0.1.0",
   "identifier": "com.cloudclock.app",
   "build": {
@@ -10,7 +10,7 @@
     "withGlobalTauri": true,
     "windows": [
       {
-        "title": "clockclock-new",
+        "title": "CloudClock",
         "width": 800,
         "height": 600
       }
