@@ -8,8 +8,14 @@ app.use((req, res, next) => {
   res.append('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
+app.use(express.text);
+
 app.get('/', (req, res) => {
   res.send('hello world')
+})
+
+app.post('/' ,(req , res) => {
+  console.log(req.body);
 })
 app.listen(6969, () => {
   console.log(`Example app listening on port ${6969}`)
