@@ -10,7 +10,7 @@
       "identifier": "http:default",
       "allow": [
         {
-          "url": "http://localhost:6969"
+          "url": "*"
         }
       ]
     },
