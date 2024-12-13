@@ -1,21 +1,47 @@
 const { invoke } = window.__TAURI__.core;
 
 
-async function fetchData() {
-   const response = await fetch("http://localhost:6969/");
-   document.getElementById("server-data").innerHTML = await response.text();
+// async function fetchData() {
+//    const response = await fetch("http://localhost:6969/");
+//    document.getElementById("server-data").innerHTML = await response.text();
 
+// }
+function sendData() {
+
+   var _ = new FormData(document.getElementById("form"));
+   const data = Object.fromEntries(_);
+   console.log(data);
+
+}
+
+function timeUp() {
+   document.getElementById("time-up").innerHTML = "TIME UP!!!";
 }
 function setTimer() {
-   var timeMsgBox = document.querySelector("#target-date");
-
-   timeMsgBox.innerHTML = document.querySelector("#targetDate").value.toString();
+   
+   var timeBox = document.querySelector("#targetDate");
+   
+   if (timeBox.value.toString() === "")
+      return;
+   
+   const timerDate = new Date(timeBox.value.toString());
+   var mili = timerDate.getTime() - (new Date()).getTime() ;
+   
+   if (mili < 0)
+      return;
+   
+   setTimeout(timeUp, mili);
 }
+
+
 function updateClock(clock) {
+
    clock.innerHTML = new Date().toLocaleTimeString();
+
 }
 
 function showTime() {
+
    var timeMsgBox = document.querySelector("#time-msg");
    setInterval(function() {
       updateClock(timeMsgBox);
@@ -23,14 +49,8 @@ function showTime() {
 
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-   document.querySelector("#time-button").addEventListener("click", () => {
-      showTime();
-      document.querySelector("#time-button").removeEventListener("show-time");
-   });
-});
-document.querySelector("#set-timer").addEventListener("click", () => {
-   setTimer();
 
-});
-fetchData();
+
+document.querySelector("#time-button").addEventListener("click",  event => {event.preventDefault();showTime();});
+document.querySelector("#set-timer").addEventListener("click",  event => {event.preventDefault();setTimer();});
+document.getElementById("send-data").addEventListener("click" , event => {event.preventDefault();sendData();});
