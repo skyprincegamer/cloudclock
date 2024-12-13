@@ -18,6 +18,8 @@
     "shell:allow-open",
     "http:default",
     "http:default",
-    "log:default"
+    "log:default",
+    "http:default",
+    "http:default"
   ]
 }

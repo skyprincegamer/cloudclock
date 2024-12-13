@@ -1,11 +1,9 @@
 const { invoke } = window.__TAURI__.core;
-import { fetch } from "@tauri-apps/plugin-http";
-import { info } from "@tauri-apps/plugin-log"
+
 
 async function fetchData() {
-   const response = await fetch("https://pokeapi.co/api/v2/pokemon/pikachu");
-   const data = await response.json();
-   info(data);
+   const response = await fetch("http://localhost:6969/");
+   document.getElementById("server-data").innerHTML = await response.text();
 
 }
 function setTimer() {
