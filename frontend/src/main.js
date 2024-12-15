@@ -6,11 +6,16 @@ const { invoke } = window.__TAURI__.core;
 //    document.getElementById("server-data").innerHTML = await response.text();
 
 // }
-function sendData() {
+async function sendData() {
 
-   var _ = new FormData(document.getElementById("form"));
-   const data = Object.fromEntries(_);
-   console.log(data);
+   const response = await fetch('http://localhost:6969/' , {
+      method : 'POST',
+      headers : {
+         "Content-Type" : "text/plain"
+      },
+      body : timeBox.value.toString()
+   });
+   console.log(response);
 
 }
 
@@ -48,9 +53,22 @@ function showTime() {
    }, 1000);
 
 }
-
+async function addUser() {
+   const data = {
+      name :"tauri",
+      pass: 'node'
+   }
+   const response = await fetch('http://localhost:6969/users' , {
+      method : 'POST',
+      headers : {
+         "Content-Type" : "application/json"
+      },
+      body : JSON.stringify(data)
+   });
+   console.log(response);
+}
 
 
 document.querySelector("#time-button").addEventListener("click",  event => {event.preventDefault();showTime();});
 document.querySelector("#set-timer").addEventListener("click",  event => {event.preventDefault();setTimer();});
-document.getElementById("send-data").addEventListener("click" , event => {event.preventDefault();sendData();});
+document.getElementById("send-data").addEventListener("click" , event => {event.preventDefault();addUser();});
