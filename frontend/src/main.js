@@ -65,7 +65,7 @@ async function addUser() {
       },
       body : JSON.stringify(data)
    });
-   console.log(response);
+   console.log(await response.text());
 }
 
 

@@ -11,6 +11,10 @@ let users;
   }
 }
 fetchUsers();
+async function addUser(user) {
+  users.push(user);
+  await fs.writeFile('users.json' , JSON.stringify(users)) ;
+}
 // respond with "hello world" when a GET request is made to the homepage
 app.use((req, res, next) => {
   res.append('Access-Control-Allow-Origin', ['*']);
@@ -25,17 +29,19 @@ app.get('/users/:id', (req, res) => {
 
 app.post('/users' ,(req , res) => {
   console.log(req.body);
-  let newUser = JSON.parse(body);
-  newUser.id = users.slice(-1).id +1;
-  newUser = JSON.stringify(newUser)  
-  fs.appendFile('file.log', newUser, err => {
-    if (err) {
-      console.error(err);
-    } else {
-      // done!
-    }
-  });
-  return res.send('done');
+  let newUser = req.body;
+  if(users === undefined){
+    users = [];
+    newUser.id = 0;
+  }
+  else{
+    newUser.id = users.splice(-1)[0].id +1;
+  }
+  addUser(newUser);
+  
+  
+  return res.send('New user id is ' + newUser.id);
+  
 })
 app.listen(6969, () => {
   console.log(`Example app listening on port ${6969}`)
