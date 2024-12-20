@@ -13,6 +13,7 @@ let users;
 }
 fetchUsers();
 function findUser(id){
+  id = Number(id);
   for(const element of users){
     if (element.id === id){
       return element
@@ -45,25 +46,24 @@ if(findUser(req.params.user) !== undefined){
 });
 app.post('/alarms/:user/' , (req, res) => {
 let user = findUser(req.params.user);
-let id ;
+console.log(users + ', params = ' + req.params.user )
+console.log(user)
 if(user !== undefined){
   if(user.alarms === undefined){
     user.alarms =[];
   }
-  id = users.alarms.length
+  const id = user.alarms.length
   user.alarms.push({ "id" : id, "date" : req.body.date });
   console.log(user.alarms);
   return res.send(JSON.stringify(user.alarms[user.alarms.length-1]));
 }
+return res.send("ERROR")
 }
 );
 app.post('/users' ,(req , res) => {
   let newUser = req.body;
   newUser.id = users.length;
   addUser(newUser);
-
-  
-  
   return res.send(newUser.id.toString());
   
 })
