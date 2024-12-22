@@ -19,10 +19,9 @@ async function addAlarm(targetDate) {
     console.log(await response.text());
 }
 
-async function addUser() {
+async function register() {
    const data = {
-      name :document.querySelector('[name="username"]'),
-      pass: document.querySelector('[name="password"]'),
+      name :document.querySelector('[name="usercode"]'),
       serverpass : document.querySelector('[name="server-password"]')
    }
    const response = await fetch('http://localhost:6969/users' , {
@@ -36,4 +35,4 @@ async function addUser() {
    console.log(userID);
 }
 
-document.getElementById("login").addEventListener("click" , event => {event.preventDefault();addUser();});
+document.getElementById("login").addEventListener("click" , event => {event.preventDefault();register();});

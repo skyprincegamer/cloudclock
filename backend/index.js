@@ -13,7 +13,6 @@ app.use((req, res, next) => {
   res.append('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
-
 app.use(express.json())
 
 
@@ -26,9 +25,7 @@ async function fetchUsers()
   } catch (err) {
     users=[];
     await fs.writeFile('users.json' , "[]" )
-  }
-}
-fetchUsers();
+  }}fetchUsers();
 
 
 function findUser(id){
@@ -64,10 +61,6 @@ async function addUser(user) {
 }
 
 
-app.get('/users/:id', (req, res) => {
-  res.send(users[req.params.id - 1 ].name);
-})
-
 app.get('/alarms/:user/:alarm' , (req , res ) => {
 
   if(findAlarm(req.params.alarm , req.params.user) !== undefined){
@@ -77,23 +70,20 @@ app.get('/alarms/:user/:alarm' , (req , res ) => {
 });
 
 
-
-
 app.post('/alarms/:user/' , (req, res) => {
 
   let user = findUser(req.params.user);
   console.log(users + ', params = ' + req.params.user )
-  console.log(user)
+  
   if(user !== undefined){
 
     if(user.alarms === undefined){
       user.alarms =[];
     }
 
-    const id = user.alarms.length
+    const id = Math.floor(Math.random*10000);
     user.alarms.push({ "id" : id, "date" : req.body.date });
-    console.log(user.alarms);
-    return res.send(JSON.stringify(user.alarms[user.alarms.length-1]));
+    return res.send(id.toString());
   }
 
 return res.send("ERROR")  
@@ -114,11 +104,21 @@ app.delete("/alarms/:user/:alarm" , (req, res) =>{
 
 
 app.post('/users' ,(req , res) => {
-  let newUser = req.body;
-  newUser.id = users.length;
+  if(serverpass === req.body.serverpass){
+  const newUser = {
+    userCode : req.body.name,
+    id : Math.floor(Math.random *10000)
+  };
   addUser(newUser);
+  console.log(newUser)
   return res.send(newUser.id.toString());
-})
+}
+
+else{
+  return res.send('WRONG SERVER PASSWORD')
+}
+}
+);
 
 
 app.listen(6969, () => {
