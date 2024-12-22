@@ -1,7 +1,11 @@
 const express = require('express')
 const fs = require('node:fs/promises')
 const app = express()
+const prompt = require('prompt-sync')();
 let users;
+let serverpass = prompt('enter pass : ');
+console.log('pass is ' , serverpass);
+
 // headers
 app.use((req, res, next) => {
   res.append('Access-Control-Allow-Origin', ['*']);
