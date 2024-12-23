@@ -19,10 +19,11 @@ async function addAlarm(targetDate) {
     console.log(await response.text());
 }
 
-async function register() {
+async function register() {   
+
    const data = {
-      name :document.querySelector('[name="usercode"]'),
-      serverpass : document.querySelector('[name="server-password"]')
+      name :document.querySelector('[name="usercode"]').value,
+      serverpass : document.querySelector('[name="server-password"]').value
    }
    const response = await fetch('http://localhost:6969/users' , {
       method : 'POST',
@@ -32,7 +33,11 @@ async function register() {
       body : JSON.stringify(data)
    });
    userID = await response.text();
-   console.log(userID);
+   return userID;
 }
 
-document.getElementById("login").addEventListener("click" , event => {event.preventDefault();register();});
+document.getElementById("login").addEventListener("click" , async event => {
+   event.preventDefault();
+   await register();
+   window.location.replace("/clock");
+});

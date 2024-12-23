@@ -107,7 +107,7 @@ app.post('/users' ,(req , res) => {
   if(serverpass === req.body.serverpass){
   const newUser = {
     userCode : req.body.name,
-    id : Math.floor(Math.random *10000)
+    id : Math.floor(Math.random() *10000)
   };
   addUser(newUser);
   console.log(newUser)
