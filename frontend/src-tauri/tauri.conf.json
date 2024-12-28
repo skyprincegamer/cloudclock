@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "identifier": "com.cloudclock.app",
   "build": {
-    "frontendDist": "../src"
+    "frontendDist": "../build"
   },
   "app": {
     "withGlobalTauri": true,

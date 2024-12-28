@@ -1,4 +1,3 @@
-const { invoke } = window.__TAURI__.core;
 
 let userID;
 
@@ -35,14 +34,14 @@ async function register() {
       body: JSON.stringify(data)
    });
    userID = await response.text();
-   return userID;
 }
 if (window.location.href === "/") {
-   document.getElementById("login").addEventListener("click", async event => {
-      event.preventDefault();
-      await register();
-      window.location.replace("/clock");
-   });
+   document.getElementById("login").addEventListener("click",
+       async event => {
+          event.preventDefault();
+          await register();
+          window.location.replace("/clock");
+       });
 }
 if (window.location.href === "/clock") {
    document.getElementById('add-alarm').addEventListener('click', async () => {
