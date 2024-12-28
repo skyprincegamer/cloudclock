@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../static/styles.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CloudClock</title>
   <script type="module" src="/main.js" defer></script>
@@ -15,7 +15,7 @@
 
     <div class="row">
       <a href="https://github.com/skyprincegamer/CloudClock" target="_blank">
-        <img src="/assets/icons8-clock-96.png" class="logo clock" alt=" placeholder logo" />
+        <img src="/icons8-clock-96.png" class="logo clock" alt=" placeholder logo" />
       </a>
     </div>
     <p>Click on the placeholder logo to open its Github repo</p>
